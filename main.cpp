@@ -6,7 +6,11 @@ using namespace std;
 struct Koral
 {
     short id_korala = 0;
-    char id_sznura[3] ;
+    //char id_sznura[3] ;
+
+    char id_sz_0;
+    char id_sz_1;
+    char id_sz_2;
 
     Koral* prev = nullptr;
     Koral* next = nullptr;
@@ -24,6 +28,15 @@ struct Lista_Korali
 
     int dlg_listy = 0;
 
+
+
+    void czy_mniejszt_id_sznura___lewa_mniejsza_od_prawej(Koral* k1, Koral* k2  )
+    {
+
+
+
+    }
+
     void add_wiazanie_do_korala( Koral* k1 )
     {
 
@@ -37,23 +50,31 @@ struct Lista_Korali
             koniec = poczatek;
             temp = poczatek;
 
-            poczatek->id_sznura[0] = k1->id_sznura[0] ;
-            poczatek->id_sznura[1] = k1->id_sznura[1] ;
-            poczatek->id_sznura[2] = k1->id_sznura[2] ;
+            poczatek->id_sz_0 = k1->id_sz_0 ;
+            poczatek->id_sz_1 = k1->id_sz_1 ;
+            poczatek->id_sz_2 = k1->id_sz_2 ;
 
             poczatek->id_korala = k1->id_korala;
-
             poczatek->next = nullptr;
 
-            dlg_listy = 1;
 
         } else
         {
 
-            while ( (k1->id_sznura < temp->id_sznura)  )
+//            while ( (k1->id_sz_0 < temp->id_sz_0 )  )
+//            {
+//                temp = temp->prev;
+//
+//            }
+
+            while ( ( k1->id_sz_0 == temp->id_sz_0 ) && ( k1->id_sz_1 < temp->id_sz_1 ) )
             {
                 temp = temp->prev;
 
+            }
+            while ( ( k1->id_sz_0 == temp->id_sz_0 ) && ( k1->id_sz_1 == temp->id_sz_1 ) && ( k1->id_sz_2 < temp->id_sz_2 )  )
+            {
+                temp = temp->prev;
             }
 
             if ( temp == nullptr )
@@ -61,25 +82,25 @@ struct Lista_Korali
 
 
                 poczatek->prev = new Koral;
-                poczatek->prev->id_sznura[0] = k1->id_sznura[0] ;
-                poczatek->prev->id_sznura[1] = k1->id_sznura[1] ;
-                poczatek->prev->id_sznura[2] = k1->id_sznura[2] ;
+                poczatek->prev->id_sz_0 = k1->id_sz_0 ;
+                poczatek->prev->id_sz_1 = k1->id_sz_1 ;
+                poczatek->prev->id_sz_2 = k1->id_sz_2 ;
                 poczatek->prev->id_korala = k1->id_korala ;
                 poczatek->prev->next = poczatek;
                 poczatek = poczatek->prev ;
 
 
 
-            } else if ( (k1->id_sznura > temp->id_sznura) )
+            } else if ( ( k1->id_sz_0 > temp->id_sz_0  ) || ( (k1->id_sz_0 == temp->id_sz_0) && (k1->id_sz_1 > temp->id_sz_1 ) || ( (k1->id_sz_0 == temp->id_sz_0) &&  (k1->id_sz_1 == temp->id_sz_1) && (k1->id_sz_2 > temp->id_sz_2 ) ) ) )
             {
 
                 temp = koniec;
 
                 koniec->next = new Koral;
                 koniec = koniec->next ;
-                koniec->id_sznura[0] = k1->id_sznura[0] ;
-                koniec->id_sznura[1] = k1->id_sznura[1] ;
-                koniec->id_sznura[2] = k1->id_sznura[2] ;
+                koniec->id_sz_0 = k1->id_sz_0 ;
+                koniec->id_sz_1 = k1->id_sz_1 ;
+                koniec->id_sz_2 = k1->id_sz_2 ;
                 koniec->id_korala = k1->id_korala ;
                 koniec->prev = temp;
 
@@ -96,9 +117,9 @@ struct Lista_Korali
 
 
                     poczatek->prev = new Koral;
-                    poczatek->prev->id_sznura[0] = k1->id_sznura[0] ;
-                    poczatek->prev->id_sznura[1] = k1->id_sznura[1] ;
-                    poczatek->prev->id_sznura[2] = k1->id_sznura[2] ;
+                    poczatek->prev->id_sz_0  = k1->id_sz_0  ;
+                    poczatek->prev->id_sz_1  = k1->id_sz_1  ;
+                    poczatek->prev->id_sz_2  = k1->id_sz_2  ;
                     poczatek->prev->id_korala = k1->id_korala ;
                     poczatek->prev->next = poczatek;
                     poczatek = poczatek->prev ;
@@ -111,9 +132,9 @@ struct Lista_Korali
 
                     koniec->next = new Koral;
                     koniec = koniec->next ;
-                    koniec->id_sznura[0] = k1->id_sznura[0] ;
-                    koniec->id_sznura[1] = k1->id_sznura[1] ;
-                    koniec->id_sznura[2] = k1->id_sznura[2] ;
+                    koniec->id_sz_0  = k1->id_sz_0  ;
+                    koniec->id_sz_1  = k1->id_sz_1  ;
+                    koniec->id_sz_2  = k1->id_sz_2  ;
                     koniec->id_korala = k1->id_korala ;
                     koniec->prev = temp;
 
@@ -130,9 +151,9 @@ struct Lista_Korali
 
                     temp = temp->next ;
 
-                    temp->id_sznura[0] = k1->id_sznura[0] ;
-                    temp->id_sznura[1] = k1->id_sznura[1] ;
-                    temp->id_sznura[2] = k1->id_sznura[2] ;
+                    temp->id_sz_0  = k1->id_sz_0  ;
+                    temp->id_sz_1  = k1->id_sz_1  ;
+                    temp->id_sz_2  = k1->id_sz_2  ;
                     temp->id_korala = k1->id_korala ;
 
 
@@ -176,7 +197,9 @@ struct Sznur
     Sznur* next;
     Sznur* prev;
 
-    char id_sznura[3];
+    char id_sz_0 ;
+    char id_sz_1 ;
+    char id_sz_2 ;
 
     int ile_korali = 0;
 
@@ -199,15 +222,16 @@ struct Struktura
     Sznur* temp ;
     Sznur* temp_2 ;
 
-    void add_sznur( char sn[] )
+    void add_sznur( char y0, char y1, char y2 )
     {
 
         if ( first == nullptr )
         {
             first = new Sznur;
-            first->id_sznura[0] = sn[0] ;
-            first->id_sznura[1] = sn[1] ;
-            first->id_sznura[2] = sn[2] ;
+
+            first->id_sz_0 = y0 ;
+            first->id_sz_1 = y1 ;
+            first->id_sz_2 = y2 ;
 
             last = first;
 
@@ -217,7 +241,7 @@ struct Struktura
 
 
             temp = last ;
-            while ( temp->id_sznura > sn )
+            while ( ( y0 < temp->id_sz_0  ) || ( ( y0 == temp->id_sz_0) && ( y1 < temp->id_sz_1 ) || ( ( y0 == temp->id_sz_0) &&  ( y1 == temp->id_sz_1) && ( y2 < temp->id_sz_2 ) )  ) )
             {
                 temp = temp->prev;
             }
@@ -228,19 +252,19 @@ struct Struktura
                 first->prev->next = first;
                 first = first->prev ;
 
-                first->id_sznura[0] = sn[0] ;
-                first->id_sznura[1] = sn[1] ;
-                first->id_sznura[2] = sn[2] ;
+                first->id_sz_0 = y0 ;
+                first->id_sz_1 = y1 ;
+                first->id_sz_2 = y2 ;
 
-            } else if ( (temp->id_sznura < sn) && (temp == last) )
+            } else if ( ( ( y0 > temp->id_sz_0  ) || ( ( y0 == temp->id_sz_0) && ( y1 > temp->id_sz_1 ) || ( ( y0 == temp->id_sz_0) &&  ( y1 == temp->id_sz_1) && ( y2 > temp->id_sz_2 ) )  ) )  && (temp == last) )
             {
                 temp->next = new Sznur;
                 temp->next->prev = temp ;
                 last = temp->next ;
 
-                last->id_sznura[0] = sn[0] ;
-                last->id_sznura[1] = sn[1] ;
-                last->id_sznura[2] = sn[2] ;
+                last->id_sz_0 = y0 ;
+                last->id_sz_1 = y1 ;
+                last->id_sz_2 = y2 ;
 
             } else
             {
@@ -254,13 +278,50 @@ struct Struktura
 
                 temp = temp->next ;
 
-                temp->id_sznura[0] = sn[0] ;
-                temp->id_sznura[1] = sn[1] ;
-                temp->id_sznura[2] = sn[2] ;
+                temp->id_sz_0 = y0 ;
+                temp->id_sz_1 = y1 ;
+                temp->id_sz_2 = y2 ;
 
             }
 
 
+        }
+
+    }
+
+
+
+    void add_koral( char id_sznura_0, char id_sznura_1, char id_sznura_2 , int id_korala )
+    {
+        temp = last;
+        while ( (temp->id_sz_0 != id_sznura_0) && (temp->id_sz_1 != id_sznura_1) && (temp->id_sz_2 != id_sznura_2 ) )
+        {
+            temp = temp->prev ;
+        }
+
+        temp->temp = temp->last;
+        while ( temp->temp->Koral->id_korala > id_korala )
+        {
+            temp->temp = temp->temp->prev;
+        }
+
+        if ( temp->temp == nullptr )
+        {
+            temp->first->prev = new Koral_z_wiazaniami;
+            temp->first->prev->next = temp->first ;
+
+            temp->first = temp->first->prev;
+            temp->first->Koral->id_korala = id_korala ;
+        } else if ( (temp->temp == temp->last) && ( temp->temp->Koral->id_korala < id_korala ) )\
+        {
+            temp->temp->next = new Koral_z_wiazaniami;
+            temp->temp->next->prev = temp->last ;
+
+            temp->last = temp->last->next;
+            temp->temp = temp->last->next;
+
+            temp->temp->Koral->id_korala = id_korala ;
+            // uzupelnij id sznura w kazdym koraliku !!!!
         }
 
     }
@@ -299,18 +360,6 @@ int main() {
     test_k(xxx);
 
 
-
-
-        Koral k1;
-        Koral k2;
-
-        k1.id_sznura[0] = '1';
-        k1.id_sznura[1] = '2';
-        k1.id_sznura[2] = '3';
-        k2.id_sznura[0] = '0';
-        k2.id_sznura[1] = '1';
-        k2.id_sznura[2] = '2';
-        cout << (k1.id_sznura > k2.id_sznura) << endl;
 
         cout << "Hello, World!" << endl;
 
