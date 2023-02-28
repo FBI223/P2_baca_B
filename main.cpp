@@ -899,6 +899,7 @@ struct Struktura
         Sznur* temp_wsk_sznur_nowy_koral = last ;
 
 
+
         cout << "FLAGA 00 " << endl;
 
         Koral* koral_przenoszony_stara_lokalizacja = temp_wsk_sznur->last;
